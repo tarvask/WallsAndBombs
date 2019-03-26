@@ -14,16 +14,16 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        m_MobSpawner = new CellsGridSpawner();
-        m_BombSpawner = new CellsGridSpawner();
+        m_MobSpawner = new CellsGridSpawner(this);
+        m_BombSpawner = new CellsGridSpawner(this);
 
         InitParameters();
     }
 
     private void Start()
     {
-        m_MobSpawner.DoSpawn();
-        m_BombSpawner.DoSpawn();
+        StartCoroutine(m_MobSpawner.DoSpawn());
+        StartCoroutine(m_BombSpawner.DoSpawn());
     }
 
     private void InitParameters()
@@ -31,6 +31,8 @@ public class GameController : MonoBehaviour
         // MobSpawner
         m_MobSpawner.SpawnTransform = m_RootsCarrier.m_MobsRoot;
         m_MobSpawner.PrefabToSpawn = m_Parameters.m_MobPrefab;
+        m_MobSpawner.SpawnDelay = m_Parameters.m_MobSpawnDelay;
+        m_MobSpawner.InfiniteSpawn = m_Parameters.m_MobInfiniteSpawn;
         m_MobSpawner.CellSize = m_Parameters.m_CellSize;
         m_MobSpawner.FieldStart = m_Parameters.m_FieldStart;
         m_MobSpawner.FieldEnd = m_Parameters.m_FieldEnd;
@@ -42,6 +44,8 @@ public class GameController : MonoBehaviour
         // BombSpawner
         m_BombSpawner.SpawnTransform = m_RootsCarrier.m_BombsRoot;
         m_BombSpawner.PrefabToSpawn = m_Parameters.m_BombPrefab;
+        m_BombSpawner.SpawnDelay = m_Parameters.m_BombSpawnDelay;
+        m_BombSpawner.InfiniteSpawn = m_Parameters.m_BombInfiniteSpawn;
         m_BombSpawner.CellSize = m_Parameters.m_CellSize;
         m_BombSpawner.FieldStart = m_Parameters.m_FieldStart;
         m_BombSpawner.FieldEnd = m_Parameters.m_FieldEnd;

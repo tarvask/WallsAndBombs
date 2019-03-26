@@ -6,6 +6,8 @@ public class CellsGridSpawner
 {
     Transform m_SpawnTransform = null;
     GameObject m_PrefabToSpawn = null;
+    float m_SpawnDelay = 0f;
+    bool m_InfiniteSpawn = false;
     float m_CellSize = 1f;
     Vector2 m_FieldStart = new Vector2(0, 0);
     Vector2 m_FieldEnd = new Vector2(8, 8);
@@ -17,6 +19,8 @@ public class CellsGridSpawner
     // public setters for parameters
     public Transform SpawnTransform { set { m_SpawnTransform = value; } }
     public GameObject PrefabToSpawn { set { m_PrefabToSpawn = value; } }
+    public float SpawnDelay { set { m_SpawnDelay = value; } }
+    public bool InfiniteSpawn { set { m_InfiniteSpawn = value; } }
     public float CellSize { set { m_CellSize = value; } }
     public Vector2 FieldStart { set { m_FieldStart = value; } }
     public Vector2 FieldEnd { set { m_FieldEnd = value; } }
@@ -25,7 +29,24 @@ public class CellsGridSpawner
     public float SpawnProbability { set { m_SpawnProbability = value; } }
     public float ShiftRadius { set { m_ShiftRadius = value; } }
 
-    public void DoSpawn()
+    GameController m_GameController = null;
+    bool m_StopSpawn = false;
+
+    // GameController is needed only for Coroutines
+    public CellsGridSpawner(GameController gameController)
+    {
+        m_GameController = gameController;
+    }
+
+    public IEnumerator DoSpawn()
+    {
+        while (!m_StopSpawn)
+        {
+            yield return m_GameController.StartCoroutine(SpawnRoutine());
+        }
+    }
+
+    IEnumerator SpawnRoutine()
     {
         Vector2 currentSpawnPosition = m_FieldStart;
         int xIterations = 0;
@@ -49,10 +70,22 @@ public class CellsGridSpawner
                 SpawnWithProbability(currentSpawnShiftedPosition, m_SpawnOnFloor, m_SpawnProbability);
 
                 xIterations++;
+
+                if (m_SpawnDelay > 0)
+                {
+                    yield return new WaitForSeconds(m_SpawnDelay);
+                }
             }
 
             yIterations++;
         }
+
+        if (!m_InfiniteSpawn)
+        {
+            m_StopSpawn = true;
+        }
+
+        yield return null;
     }
 
     Vector2 GetRandomShiftWithinCircle(float shiftRadius)
