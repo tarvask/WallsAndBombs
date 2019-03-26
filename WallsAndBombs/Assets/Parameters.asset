@@ -17,13 +17,21 @@ MonoBehaviour:
   m_FieldEnd: {x: 5, y: 5}
   m_MobPrefab: {fileID: 4538389499245411842, guid: 456017f754516f24eb7e9a26980ef6fa,
     type: 3}
+  m_MobSpawnDelay: 0
+  m_MobInfiniteSpawn: 0
   m_MobSpawnHeight: 0
   m_MobSpawnOnFloor: 1
   m_MobSpawnProbability: 0.3
   m_MobShiftRadius: 0.3
   m_BombPrefab: {fileID: 5841948176683393833, guid: aba9e40087c14fe43962ff8db0da265b,
     type: 3}
+  m_BombSpawnDelay: 0.5
+  m_BombInfiniteSpawn: 1
   m_BombSpawnHeight: 6
   m_BombSpawnOnFloor: 0
   m_BombSpawnProbability: 0.2
   m_BombShiftRadius: 0.4
+  m_ExplosionPrefab: {fileID: 8790902148760089283, guid: ae839fc001433415eb52ce2090ca7168,
+    type: 3}
+  m_ExplosionDuration: 0.3
+  m_ExplosionSize: 2

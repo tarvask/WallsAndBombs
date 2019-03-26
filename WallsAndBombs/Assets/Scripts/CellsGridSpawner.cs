@@ -32,6 +32,8 @@ public class CellsGridSpawner
     GameController m_GameController = null;
     bool m_StopSpawn = false;
 
+    public event System.Action<GameObject> OnObjectSpawned;
+
     // GameController is needed only for Coroutines
     public CellsGridSpawner(GameController gameController)
     {
@@ -103,22 +105,27 @@ public class CellsGridSpawner
     {
         if (Random.Range(0f, 1f) < probabilityFactor)
         {
-            SpawnSingleMob(spawnPosition, m_SpawnOnFloor);
+            SpawnSingleObject(spawnPosition, m_SpawnOnFloor);
         }
     }
 
-    void SpawnSingleMob(Vector2 spawnPosition, bool spawnOnFloor)
+    void SpawnSingleObject(Vector2 spawnPosition, bool spawnOnFloor)
     {
-        GameObject mob = Object.Instantiate(m_PrefabToSpawn, m_SpawnTransform);
+        GameObject spawnedObject = Object.Instantiate(m_PrefabToSpawn, m_SpawnTransform);
         // get height of mob to correctly spawn mob above the floor
         float mobSpawnHeight = m_SpawnHeight;
 
         if (spawnOnFloor)
         {
-            mobSpawnHeight += GetColliderHeight(mob);
+            mobSpawnHeight += GetColliderHeight(spawnedObject);
         }
 
-        mob.transform.localPosition = new Vector3(spawnPosition.x, mobSpawnHeight / 2, spawnPosition.y);
+        spawnedObject.transform.localPosition = new Vector3(spawnPosition.x, mobSpawnHeight / 2, spawnPosition.y);
+
+        if (OnObjectSpawned != null)
+        {
+            OnObjectSpawned(spawnedObject);
+        }
     }
 
     float GetColliderHeight(GameObject spawnedObject)

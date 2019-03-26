@@ -11,11 +11,15 @@ public class GameController : MonoBehaviour
 
     private CellsGridSpawner m_MobSpawner = null;
     private CellsGridSpawner m_BombSpawner = null;
+    private MobsController m_MobsController = null;
+    private BombsController m_BombsController = null;
 
     private void Awake()
     {
         m_MobSpawner = new CellsGridSpawner(this);
         m_BombSpawner = new CellsGridSpawner(this);
+        m_MobsController = new MobsController(m_MobSpawner);
+        m_BombsController = new BombsController(m_BombSpawner);
 
         InitParameters();
     }
@@ -53,5 +57,10 @@ public class GameController : MonoBehaviour
         m_BombSpawner.SpawnOnFloor = m_Parameters.m_BombSpawnOnFloor;
         m_BombSpawner.SpawnProbability = m_Parameters.m_BombSpawnProbability;
         m_BombSpawner.ShiftRadius = m_Parameters.m_BombShiftRadius;
+
+        // BombsController
+        m_BombsController.ExplosionPrefab = m_Parameters.m_ExplosionPrefab;
+        m_BombsController.ExplosionDuration = m_Parameters.m_ExplosionDuration;
+        m_BombsController.ExplosionSize = m_Parameters.m_ExplosionSize;
     }
 }
