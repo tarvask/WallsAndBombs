@@ -12,10 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed7baa04fc8bd4ac5bce82ec47e1258b, type: 3}
   m_Name: Parameters
   m_EditorClassIdentifier: 
-  m_MobPrefab: {fileID: 4538389499245411842, guid: 456017f754516f24eb7e9a26980ef6fa,
-    type: 3}
   m_CellSize: 1
   m_FieldStart: {x: -5, y: -5}
   m_FieldEnd: {x: 5, y: 5}
-  m_SpawnProbability: 0.2
-  m_ShiftRadius: 0.3
+  m_MobPrefab: {fileID: 4538389499245411842, guid: 456017f754516f24eb7e9a26980ef6fa,
+    type: 3}
+  m_MobSpawnHeight: 0
+  m_MobSpawnOnFloor: 1
+  m_MobSpawnProbability: 0.3
+  m_MobShiftRadius: 0.3
+  m_BombPrefab: {fileID: 5841948176683393833, guid: aba9e40087c14fe43962ff8db0da265b,
+    type: 3}
+  m_BombSpawnHeight: 6
+  m_BombSpawnOnFloor: 0
+  m_BombSpawnProbability: 0.2
+  m_BombShiftRadius: 0.4

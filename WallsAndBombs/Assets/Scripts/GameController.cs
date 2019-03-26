@@ -6,28 +6,48 @@ public class GameController : MonoBehaviour
 {
     [SerializeField]
     private Parameters m_Parameters = null;
-
     [SerializeField]
-    private MobSpawner m_MobSpawner = null;
+    private HierarchyRootsCarrier m_RootsCarrier = null;
+
+    private CellsGridSpawner m_MobSpawner = null;
+    private CellsGridSpawner m_BombSpawner = null;
 
     private void Awake()
     {
+        m_MobSpawner = new CellsGridSpawner();
+        m_BombSpawner = new CellsGridSpawner();
+
         InitParameters();
     }
 
     private void Start()
     {
-        m_MobSpawner.LateStart();
+        m_MobSpawner.DoSpawn();
+        m_BombSpawner.DoSpawn();
     }
 
     private void InitParameters()
     {
         // MobSpawner
-        m_MobSpawner.MobPrefab = m_Parameters.m_MobPrefab;
+        m_MobSpawner.SpawnTransform = m_RootsCarrier.m_MobsRoot;
+        m_MobSpawner.PrefabToSpawn = m_Parameters.m_MobPrefab;
         m_MobSpawner.CellSize = m_Parameters.m_CellSize;
         m_MobSpawner.FieldStart = m_Parameters.m_FieldStart;
         m_MobSpawner.FieldEnd = m_Parameters.m_FieldEnd;
-        m_MobSpawner.SpawnProbability = m_Parameters.m_SpawnProbability;
-        m_MobSpawner.ShiftRadius = m_Parameters.m_ShiftRadius;
+        m_MobSpawner.SpawnHeight = m_Parameters.m_MobSpawnHeight;
+        m_MobSpawner.SpawnOnFloor = m_Parameters.m_MobSpawnOnFloor;
+        m_MobSpawner.SpawnProbability = m_Parameters.m_MobSpawnProbability;
+        m_MobSpawner.ShiftRadius = m_Parameters.m_MobShiftRadius;
+
+        // BombSpawner
+        m_BombSpawner.SpawnTransform = m_RootsCarrier.m_BombsRoot;
+        m_BombSpawner.PrefabToSpawn = m_Parameters.m_BombPrefab;
+        m_BombSpawner.CellSize = m_Parameters.m_CellSize;
+        m_BombSpawner.FieldStart = m_Parameters.m_FieldStart;
+        m_BombSpawner.FieldEnd = m_Parameters.m_FieldEnd;
+        m_BombSpawner.SpawnHeight = m_Parameters.m_BombSpawnHeight;
+        m_BombSpawner.SpawnOnFloor = m_Parameters.m_BombSpawnOnFloor;
+        m_BombSpawner.SpawnProbability = m_Parameters.m_BombSpawnProbability;
+        m_BombSpawner.ShiftRadius = m_Parameters.m_BombShiftRadius;
     }
 }
