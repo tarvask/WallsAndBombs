@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -895,6 +895,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1316291242}
+  - component: {fileID: 1316291243}
   - component: {fileID: 1316291241}
   m_Layer: 0
   m_Name: GameController
@@ -917,6 +918,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MobPrefab: {fileID: 4538389499245411842, guid: 456017f754516f24eb7e9a26980ef6fa,
     type: 3}
+  m_CellSize: 1
+  m_FieldStart: {x: -5, y: -5}
+  m_FieldEnd: {x: 5, y: 5}
+  m_SpawnProbability: 0.2
 --- !u!4 &1316291242
 Transform:
   m_ObjectHideFlags: 0
@@ -931,6 +936,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1316291243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316291240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d9cd83f6e08f4414a9c2a3508675a6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Parameters: {fileID: 11400000, guid: abda8380bb72d49d186da1cbca860b57, type: 2}
+  m_MobSpawner: {fileID: 1316291241}
 --- !u!4 &1425752346 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6660668353756150939, guid: 26afc9cd82cb5a2408c9092a7b063f79,

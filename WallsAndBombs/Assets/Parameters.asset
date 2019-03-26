@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7baa04fc8bd4ac5bce82ec47e1258b, type: 3}
+  m_Name: Parameters
+  m_EditorClassIdentifier: 
+  m_MobPrefab: {fileID: 4538389499245411842, guid: 456017f754516f24eb7e9a26980ef6fa,
+    type: 3}
+  m_CellSize: 1
+  m_FieldStart: {x: -5, y: -5}
+  m_FieldEnd: {x: 5, y: 5}
+  m_SpawnProbability: 0.2
+  m_ShiftRadius: 0.3
