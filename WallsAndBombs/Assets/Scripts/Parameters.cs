@@ -31,9 +31,15 @@ public class Parameters : ScriptableObject
     public float m_BombSpawnProbability = 0.3f;
     public float m_BombShiftRadius = 0.3f;
 
+    [Header("Mobs Controller")]
+
+    public int m_MobHealthPoints = 100;
+
     [Header("Bombs Controller")]
 
     public GameObject m_ExplosionPrefab = null;
     public float m_ExplosionDuration = 0.3f;
     public float m_ExplosionSize = 2f;
+    public float m_ExplosionHurtRadius = 2f;
+    public int m_ExplosionHurtValue = 10;
 }

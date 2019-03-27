@@ -10,10 +10,16 @@ public class BombsController
     GameObject m_ExplosionPrefab = null;
     float m_ExplosionDuration = 0.3f;
     float m_ExplosionSize = 1f;
+    float m_ExplosionHurtRadius = 2f;
+    int m_ExplosionHurtValue = 10;
 
     public GameObject ExplosionPrefab { set { m_ExplosionPrefab = value; } }
     public float ExplosionDuration { set { m_ExplosionDuration = value; } }
     public float ExplosionSize { set { m_ExplosionSize = value; } }
+    public float ExplosionHurtRadius { set { m_ExplosionHurtRadius = value; } }
+    public int ExplosionHurtValue { set { m_ExplosionHurtValue = value; } }
+
+    public event System.Action<Transform, float, int> OnSomeBombExploded;
 
     public BombsController(CellsGridSpawner bombsSpawner)
     {
@@ -24,12 +30,17 @@ public class BombsController
     void OnBombSpawned(GameObject bombGO)
     {
         Bomb bomb = bombGO.GetComponent<Bomb>();
-        bomb.OnBombExploded += OnBombExploded;
+        bomb.OnBombDetonated += ExplodeBomb;
         m_AllBombs.Add(bomb);
     }
 
-    void OnBombExploded(Transform bombTransform)
+    void ExplodeBomb(Transform bombTransform)
     {
+        if (OnSomeBombExploded != null)
+        {
+            OnSomeBombExploded(bombTransform, m_ExplosionHurtRadius, m_ExplosionHurtValue);
+        }
+
         CreateExplosion(bombTransform);
         Object.Destroy(bombTransform.gameObject);
     }

@@ -18,8 +18,8 @@ public class GameController : MonoBehaviour
     {
         m_MobSpawner = new CellsGridSpawner(this);
         m_BombSpawner = new CellsGridSpawner(this);
-        m_MobsController = new MobsController(m_MobSpawner);
         m_BombsController = new BombsController(m_BombSpawner);
+        m_MobsController = new MobsController(m_MobSpawner, m_BombsController);
 
         InitParameters();
     }
@@ -58,9 +58,14 @@ public class GameController : MonoBehaviour
         m_BombSpawner.SpawnProbability = m_Parameters.m_BombSpawnProbability;
         m_BombSpawner.ShiftRadius = m_Parameters.m_BombShiftRadius;
 
+        // MobsController
+        m_MobsController.MobHealthPoints = m_Parameters.m_MobHealthPoints;
+
         // BombsController
         m_BombsController.ExplosionPrefab = m_Parameters.m_ExplosionPrefab;
         m_BombsController.ExplosionDuration = m_Parameters.m_ExplosionDuration;
         m_BombsController.ExplosionSize = m_Parameters.m_ExplosionSize;
+        m_BombsController.ExplosionHurtRadius = m_Parameters.m_ExplosionHurtRadius;
+        m_BombsController.ExplosionHurtValue = m_Parameters.m_ExplosionHurtValue;
     }
 }

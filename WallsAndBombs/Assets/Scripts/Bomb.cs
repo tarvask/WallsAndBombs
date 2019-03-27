@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
-    public event System.Action<Transform> OnBombExploded;
+    public event System.Action<Transform> OnBombDetonated;
 
     void OnCollisionEnter(Collision collision)
     {
         //if (collision.gameObject.name == "Plane")
         //{
             // notify world of explosion
-            OnBombExploded(transform);
+            OnBombDetonated(transform);
         //}
     }
 }

@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Mob : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    int m_HealthPoints = 50;
 
-    // Update is called once per frame
-    void Update()
+    public int HealthPoints { set { m_HealthPoints = value; } }
+
+    public event System.Action<Mob> OnMobDied;
+
+    public void Hurt(int hurtValue)
     {
-        
+        m_HealthPoints -= hurtValue;
+
+        if (m_HealthPoints < 0)
+        {
+            if (OnMobDied != null)
+            {
+                OnMobDied(this);
+            }
+        }
     }
 }
