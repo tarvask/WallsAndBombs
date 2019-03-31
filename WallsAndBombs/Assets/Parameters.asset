@@ -21,7 +21,7 @@ MonoBehaviour:
   m_MobInfiniteSpawn: 0
   m_MobSpawnHeight: 0
   m_MobSpawnOnFloor: 1
-  m_MobSpawnProbability: 0.3
+  m_MobSpawnProbability: 0.1
   m_MobShiftRadius: 0.3
   m_BombPrefab: {fileID: 5841948176683393833, guid: aba9e40087c14fe43962ff8db0da265b,
     type: 3}

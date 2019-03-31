@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Mob : MonoBehaviour
 {
-    int m_HealthPoints = 50;
+    // serialized for debug
+    [SerializeField] int m_HealthPoints = 50;
 
     public int HealthPoints { set { m_HealthPoints = value; } }
 
@@ -14,7 +15,7 @@ public class Mob : MonoBehaviour
     {
         m_HealthPoints -= hurtValue;
 
-        if (m_HealthPoints < 0)
+        if (m_HealthPoints <= 0)
         {
             if (OnMobDied != null)
             {

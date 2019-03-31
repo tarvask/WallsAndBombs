@@ -40,7 +40,8 @@ public class MobsController
 
         foreach (Mob mob in mobsToHurt)
         {
-            mob.Hurt(hurtValue);
+            float unshelteredPart = CheckMobShelter(mob, explosionTransform.localPosition);
+            mob.Hurt(Mathf.CeilToInt(hurtValue * unshelteredPart));
         }
     }
 
@@ -59,5 +60,47 @@ public class MobsController
         }
 
         return result;
+    }
+
+    float CheckMobShelter(Mob mob, Vector3 explosionPosition)
+    {
+        int checksNumber = 16;
+        int unshelteredChecks = 0;
+        CapsuleCollider mobCollider = mob.GetComponent<CapsuleCollider>();
+        float mobRadius = mobCollider.radius * mob.transform.localScale.x;
+
+        GeometryHelper.FindTouchPoints(explosionPosition, mob.transform.localPosition, mobRadius,
+            out Vector3 firstTouchPoint, out Vector3 secondTouchPoint, out float distance);
+
+        // do raycasting
+        // set precise distance to avoid shelterin
+        unshelteredChecks = CountUnshelteredCheckpoints(explosionPosition, firstTouchPoint, secondTouchPoint, checksNumber, distance);
+
+        return unshelteredChecks / checksNumber;
+    }
+
+    int CountUnshelteredCheckpoints(Vector3 explosionPosition, Vector3 firstTouchPoint, Vector3 secondTouchPoint, int checksNumber, float distance)
+    {
+        int unshelteredChecks = 0;
+
+        // build vector with checkpoints
+        Vector3 touchPointsVector = secondTouchPoint - firstTouchPoint;
+        int layerMask = LayerMask.GetMask("Mobs");
+        // invert layer mask to raycast all except the Mobs
+        layerMask = ~layerMask;
+
+        for (int i = 0; i < checksNumber; i++)
+        {
+            Vector3 currentCheckPoint = firstTouchPoint + touchPointsVector * i / (checksNumber - 1);
+            Vector3 direction = currentCheckPoint - explosionPosition;
+
+            // no shelters on the way
+            if (!Physics.Raycast(explosionPosition, direction, distance, layerMask))
+            {
+                unshelteredChecks++;
+            }
+        }
+
+        return unshelteredChecks;
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1098607363141487904}
   - component: {fileID: 7884113852880227894}
   - component: {fileID: 8252595961186490358}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Mob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
